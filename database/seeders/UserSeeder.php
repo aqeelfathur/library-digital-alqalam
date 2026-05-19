@@ -12,8 +12,8 @@ class UserSeeder extends Seeder
     {
         // Pustakawan pertama
         User::create([
-            'name'     => 'Ahmad Fauzi',
-            'email'    => 'pustakawan@alqalam.sch.id',
+            'name'     => 'Resti Sundari',
+            'email'    => 'restisundari@alqalam.sch.id',
             'password' => Hash::make('password'),
             'role'     => 'pustakawan',
             'status'   => 'aktif',
@@ -21,8 +21,8 @@ class UserSeeder extends Seeder
 
         // Pustakawan kedua
         User::create([
-            'name'     => 'Siti Rahayu',
-            'email'    => 'siti.rahayu@alqalam.sch.id',
+            'name'     => 'Fajrina Annisa Puspita Ayu',
+            'email'    => 'fajrinaannisa@alqalam.sch.id',
             'password' => Hash::make('password'),
             'role'     => 'pustakawan',
             'status'   => 'aktif',
