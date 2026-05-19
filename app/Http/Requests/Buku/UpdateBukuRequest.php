@@ -32,6 +32,11 @@ class UpdateBukuRequest extends FormRequest
             'specific_detail_info' => ['nullable', 'string'],
             'status'               => ['required', 'in:tersedia,dipinjam,maintenance,hilang'],
             'image_url'            => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
+            'publication_year' => ['nullable', 'digits:4', 'integer', 'min:1900', 'max:' . date('Y')],
+            'location'         => ['nullable', 'string', 'max:100'],
+            'collection_type'  => ['nullable', 'in:buku,majalah,jurnal,skripsi,ebook'],
+            'gmd_type'         => ['nullable', 'in:Teks,Audio,Video,Digital'],
+            'description'      => ['nullable', 'string'],
         ];
     }
 

@@ -37,6 +37,10 @@ Route::prefix('berita')->name('berita.')->group(function () {
     Route::get('/{berita:slug}', [PublikBeritaController::class, 'show'])->name('show');
 });
 
+Route::get('/explore', [\App\Http\Controllers\Publik\ExploreController::class, 'index'])
+    ->name('explore');
+
+
 /*
 |--------------------------------------------------------------------------
 | Autentikasi Anggota

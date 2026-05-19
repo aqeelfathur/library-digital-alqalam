@@ -216,6 +216,73 @@
                 </div>
             </div>
 
+            {{-- Informasi Tambahan --}}
+            <div class="border-t border-stone-100 pt-6">
+                <h3 class="text-sm font-semibold text-stone-700 uppercase tracking-wider mb-4">
+                    Informasi Lokasi & Klasifikasi Koleksi
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                    <div>
+                        <label class="block text-sm font-medium text-stone-700 mb-1.5">Tahun Terbit</label>
+                        <input name="publication_year" type="number"
+                            value="{{ old('publication_year', $buku->publication_year ?? '') }}"
+                            min="1900" max="{{ date('Y') }}"
+                            class="w-full px-4 py-2.5 border border-stone-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                            placeholder="{{ date('Y') }}" />
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-stone-700 mb-1.5">Lokasi Rak</label>
+                        <select name="location"
+                                class="w-full px-4 py-2.5 border border-stone-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                            <option value="">-- Pilih Lokasi --</option>
+                            @foreach(['Rak A', 'Rak B', 'Rak C', 'Perpustakaan Utama'] as $lok)
+                                <option value="{{ $lok }}"
+                                        {{ old('location', $buku->location ?? '') === $lok ? 'selected' : '' }}>
+                                    {{ $lok }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-stone-700 mb-1.5">Tipe Koleksi</label>
+                        <select name="collection_type"
+                                class="w-full px-4 py-2.5 border border-stone-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                            <option value="">-- Pilih Tipe --</option>
+                            @foreach(['buku' => 'Buku', 'majalah' => 'Majalah', 'jurnal' => 'Jurnal', 'skripsi' => 'Skripsi', 'ebook' => 'Ebook'] as $val => $label)
+                                <option value="{{ $val }}"
+                                        {{ old('collection_type', $buku->collection_type ?? '') === $val ? 'selected' : '' }}>
+                                    {{ $label }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-stone-700 mb-1.5">GMD / Jenis Media</label>
+                        <select name="gmd_type"
+                                class="w-full px-4 py-2.5 border border-stone-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                            <option value="">-- Pilih GMD --</option>
+                            @foreach(['Teks', 'Audio', 'Video', 'Digital'] as $gmd)
+                                <option value="{{ $gmd }}"
+                                        {{ old('gmd_type', $buku->gmd_type ?? '') === $gmd ? 'selected' : '' }}>
+                                    {{ $gmd }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-stone-700 mb-1.5">Deskripsi Singkat</label>
+                        <textarea name="description" rows="3"
+                                class="w-full px-4 py-2.5 border border-stone-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none"
+                                placeholder="Deskripsi singkat isi buku untuk membantu pencarian...">{{ old('description', $buku->description ?? '') }}</textarea>
+                    </div>
+                </div>
+            </div>
+
             {{-- Tombol Aksi --}}
             <div class="border-t border-stone-100 pt-6 flex items-center gap-3 justify-end">
                 <a href="{{ route('pustakawan.buku.index') }}"

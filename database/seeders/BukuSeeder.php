@@ -27,6 +27,11 @@ class BukuSeeder extends Seeder
                 'classification'       => $data['classification'] ?? null,
                 'subject'              => $data['subject'] ?? null,
                 'physical_description' => $data['physical_description'] ?? null,
+                'publication_year'     => $data['publication_year'] ?? null,
+                'location'             => $data['location'] ?? null,
+                'collection_type'      => $data['collection_type'] ?? 'buku',
+                'gmd_type'             => $data['gmd_type'] ?? 'Teks',
+                'description'          => $data['description'] ?? null,
                 'content_type'         => 'Teks',
                 'media_type'           => 'Tanpa Perantara',
                 'carrier_type'         => 'Volume',
@@ -34,10 +39,10 @@ class BukuSeeder extends Seeder
             ]);
         }
 
-        // Buku tambahan acak menggunakan Factory
+        // Buku tambahan acak dengan Factory
         $kategoriIds = $kategori->pluck('id')->toArray();
         Buku::factory()
-            ->count(50)
+            ->count(40)
             ->sequence(fn ($seq) => [
                 'category_id' => $kategoriIds[array_rand($kategoriIds)],
             ])
@@ -49,7 +54,11 @@ class BukuSeeder extends Seeder
     private function dataBuku(): array
     {
         return [
-            // ── Kesusastraan ─────────────────────────────────────────
+
+            // ══════════════════════════════════════════
+            // KESUSASTRAAN
+            // ══════════════════════════════════════════
+
             [
                 'kategori'             => 'Kesusastraan',
                 'title'                => 'Laskar Pelangi',
@@ -60,6 +69,27 @@ class BukuSeeder extends Seeder
                 'classification'       => '813.6',
                 'subject'              => 'Novel Indonesia',
                 'physical_description' => 'xii, 534 hlm.; 21 cm',
+                'publication_year'     => '2005',
+                'location'             => 'Rak A',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Kisah luar biasa sepuluh anak Belitung yang bermimpi besar di sekolah gubuk reyot dengan semangat pantang menyerah.',
+            ],
+            [
+                'kategori'             => 'Kesusastraan',
+                'title'                => 'Sang Pemimpi',
+                'author'               => 'Andrea Hirata',
+                'publisher'            => 'Bentang Pustaka',
+                'isbn'                 => '978-979-1062-82-9',
+                'call_number'          => '813.6 HIR s',
+                'classification'       => '813.6',
+                'subject'              => 'Novel Indonesia',
+                'physical_description' => 'viii, 292 hlm.; 21 cm',
+                'publication_year'     => '2006',
+                'location'             => 'Rak A',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Sekuel Laskar Pelangi yang mengisahkan perjuangan Ikal dan Arai meraih mimpi ke Prancis.',
             ],
             [
                 'kategori'             => 'Kesusastraan',
@@ -71,6 +101,27 @@ class BukuSeeder extends Seeder
                 'classification'       => '813',
                 'subject'              => 'Novel Sejarah Indonesia',
                 'physical_description' => 'xxii, 379 hlm.; 21 cm',
+                'publication_year'     => '2005',
+                'location'             => 'Rak A',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Novel pertama Tetralogi Buru. Kisah Minke, pemuda Jawa, yang berjuang melawan ketidakadilan kolonialisme Belanda.',
+            ],
+            [
+                'kategori'             => 'Kesusastraan',
+                'title'                => 'Anak Semua Bangsa',
+                'author'               => 'Pramoedya Ananta Toer',
+                'publisher'            => 'Lentera Dipantara',
+                'isbn'                 => '978-979-97312-4-9',
+                'call_number'          => '813 PRA a',
+                'classification'       => '813',
+                'subject'              => 'Novel Sejarah Indonesia',
+                'physical_description' => 'xvi, 356 hlm.; 21 cm',
+                'publication_year'     => '2006',
+                'location'             => 'Rak A',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Novel kedua Tetralogi Buru. Minke semakin sadar akan penderitaan rakyat Indonesia di bawah penjajahan.',
             ],
             [
                 'kategori'             => 'Kesusastraan',
@@ -82,6 +133,11 @@ class BukuSeeder extends Seeder
                 'classification'       => '813',
                 'subject'              => 'Novel Islami',
                 'physical_description' => 'xvi, 412 hlm.; 20 cm',
+                'publication_year'     => '2004',
+                'location'             => 'Rak A',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Novel roman Islami berlatar Mesir. Kisah Fahri, mahasiswa Indonesia Al-Azhar, yang dihadapkan pada persoalan cinta dan keimanan.',
             ],
             [
                 'kategori'             => 'Kesusastraan',
@@ -93,6 +149,11 @@ class BukuSeeder extends Seeder
                 'classification'       => '813',
                 'subject'              => 'Novel Pendidikan',
                 'physical_description' => 'xviii, 423 hlm.; 20 cm',
+                'publication_year'     => '2009',
+                'location'             => 'Rak A',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Kisah enam santri Pondok Madani dengan mantra "Man Jadda Wajada" yang mengantarkan mereka ke penjuru dunia.',
             ],
             [
                 'kategori'             => 'Kesusastraan',
@@ -104,6 +165,11 @@ class BukuSeeder extends Seeder
                 'classification'       => '813',
                 'subject'              => 'Novel Romansa',
                 'physical_description' => 'x, 444 hlm.; 20 cm',
+                'publication_year'     => '2009',
+                'location'             => 'Rak A',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Novel karya Dee Lestari tentang perjalanan cinta Kugy dan Keenan yang diiringi mimpi dan seni.',
             ],
             [
                 'kategori'             => 'Kesusastraan',
@@ -114,9 +180,80 @@ class BukuSeeder extends Seeder
                 'classification'       => '813',
                 'subject'              => 'Novel Klasik Indonesia',
                 'physical_description' => 'viii, 216 hlm.; 21 cm',
+                'publication_year'     => '1938',
+                'location'             => 'Rak A',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Kisah tragis percintaan Zainuddin dan Hayati yang terpisah oleh adat dan tragedi kapal tenggelam.',
+            ],
+            [
+                'kategori'             => 'Kesusastraan',
+                'title'                => 'Di Bawah Lindungan Ka\'bah',
+                'author'               => 'Hamka',
+                'publisher'            => 'Bulan Bintang',
+                'call_number'          => '813 HAM d',
+                'classification'       => '813',
+                'subject'              => 'Novel Klasik Indonesia',
+                'physical_description' => 'vi, 108 hlm.; 19 cm',
+                'publication_year'     => '1938',
+                'location'             => 'Rak A',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Novel tentang cinta yang dilandasi iman. Kisah Hamid dan Zainab yang terpisah oleh takdir di tanah suci Mekkah.',
+            ],
+            [
+                'kategori'             => 'Kesusastraan',
+                'title'                => 'Ronggeng Dukuh Paruk',
+                'author'               => 'Ahmad Tohari',
+                'publisher'            => 'Gramedia Pustaka Utama',
+                'isbn'                 => '978-979-22-8041-4',
+                'call_number'          => '813 TOH r',
+                'classification'       => '813',
+                'subject'              => 'Novel Sastra Indonesia',
+                'physical_description' => 'xvi, 408 hlm.; 20 cm',
+                'publication_year'     => '2011',
+                'location'             => 'Rak A',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Kisah Srintil si ronggeng Dukuh Paruk dan tragedi manusia di tengah pergolakan politik Indonesia 1965.',
+            ],
+            [
+                'kategori'             => 'Kesusastraan',
+                'title'                => 'Pulang',
+                'author'               => 'Tere Liye',
+                'publisher'            => 'Republika',
+                'isbn'                 => '978-602-1255-33-1',
+                'call_number'          => '813 LIY p',
+                'classification'       => '813',
+                'subject'              => 'Novel Aksi Indonesia',
+                'physical_description' => 'xiv, 402 hlm.; 20 cm',
+                'publication_year'     => '2015',
+                'location'             => 'Rak A',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Kisah Bujang, anak rimba Sumatera, yang tumbuh menjadi pembunuh bayaran terhebat dan perjalanannya mencari makna pulang.',
+            ],
+            [
+                'kategori'             => 'Kesusastraan',
+                'title'                => 'Hujan',
+                'author'               => 'Tere Liye',
+                'publisher'            => 'Gramedia Pustaka Utama',
+                'isbn'                 => '978-979-22-9780-1',
+                'call_number'          => '813 LIY h',
+                'classification'       => '813',
+                'subject'              => 'Novel Fiksi Ilmiah Indonesia',
+                'physical_description' => 'x, 320 hlm.; 20 cm',
+                'publication_year'     => '2016',
+                'location'             => 'Rak A',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Novel berlatar masa depan 2042. Kisah Lail dan Soke Bahtera yang terpisah bencana alam dan bertemu kembali dalam teknologi penghapus kenangan.',
             ],
 
-            // ── Ilmu-ilmu Sosial ─────────────────────────────────────
+            // ══════════════════════════════════════════
+            // ILMU-ILMU SOSIAL
+            // ══════════════════════════════════════════
+
             [
                 'kategori'             => 'Ilmu-ilmu Sosial',
                 'title'                => 'Pendidikan Karakter: Strategi Mendidik Anak di Zaman Global',
@@ -127,6 +264,11 @@ class BukuSeeder extends Seeder
                 'classification'       => '370.11',
                 'subject'              => 'Pendidikan Karakter',
                 'physical_description' => 'xvi, 320 hlm.; 23 cm',
+                'publication_year'     => '2010',
+                'location'             => 'Rak B',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Strategi dan pendekatan pendidikan karakter yang relevan di era globalisasi untuk membentuk generasi bangsa yang berakhlak.',
             ],
             [
                 'kategori'             => 'Ilmu-ilmu Sosial',
@@ -138,6 +280,11 @@ class BukuSeeder extends Seeder
                 'classification'       => '658.3',
                 'subject'              => 'Manajemen SDM',
                 'physical_description' => 'xiv, 276 hlm.; 23 cm',
+                'publication_year'     => '2012',
+                'location'             => 'Rak B',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Buku teks manajemen SDM yang membahas rekrutmen, seleksi, pelatihan, kompensasi, hingga pemutusan hubungan kerja.',
             ],
             [
                 'kategori'             => 'Ilmu-ilmu Sosial',
@@ -149,6 +296,11 @@ class BukuSeeder extends Seeder
                 'classification'       => '301',
                 'subject'              => 'Sosiologi',
                 'physical_description' => 'xxiv, 508 hlm.; 23 cm',
+                'publication_year'     => '2015',
+                'location'             => 'Rak B',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Buku pengantar sosiologi standar yang membahas konsep dasar, kelompok sosial, lembaga kemasyarakatan, dan perubahan sosial.',
             ],
             [
                 'kategori'             => 'Ilmu-ilmu Sosial',
@@ -160,9 +312,49 @@ class BukuSeeder extends Seeder
                 'classification'       => '339',
                 'subject'              => 'Ekonomi Makro',
                 'physical_description' => 'xx, 442 hlm.; 23 cm',
+                'publication_year'     => '2016',
+                'location'             => 'Rak B',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Buku teks makroekonomi yang membahas pendapatan nasional, pertumbuhan ekonomi, kebijakan fiskal, dan moneter.',
+            ],
+            [
+                'kategori'             => 'Ilmu-ilmu Sosial',
+                'title'                => 'Psikologi Perkembangan: Suatu Pendekatan Sepanjang Rentang Kehidupan',
+                'author'               => 'Elizabeth B. Hurlock',
+                'publisher'            => 'Erlangga',
+                'isbn'                 => '978-979-741-046-3',
+                'call_number'          => '155 HUR p',
+                'classification'       => '155',
+                'subject'              => 'Psikologi Perkembangan',
+                'physical_description' => 'xiv, 500 hlm.; 24 cm',
+                'publication_year'     => '2013',
+                'location'             => 'Rak B',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Referensi psikologi perkembangan dari masa bayi hingga lanjut usia yang digunakan secara luas di perguruan tinggi Indonesia.',
+            ],
+            [
+                'kategori'             => 'Ilmu-ilmu Sosial',
+                'title'                => 'Ilmu Komunikasi: Teori dan Praktik',
+                'author'               => 'Onong Uchjana Effendy',
+                'publisher'            => 'Rosda',
+                'isbn'                 => '978-979-692-234-5',
+                'call_number'          => '302.2 EFF i',
+                'classification'       => '302.2',
+                'subject'              => 'Ilmu Komunikasi',
+                'physical_description' => 'xii, 368 hlm.; 23 cm',
+                'publication_year'     => '2017',
+                'location'             => 'Rak B',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Membahas teori komunikasi, proses komunikasi massa, komunikasi antar pribadi, dan perkembangan media komunikasi.',
             ],
 
-            // ── Ilmu-ilmu Terapan ────────────────────────────────────
+            // ══════════════════════════════════════════
+            // ILMU-ILMU TERAPAN
+            // ══════════════════════════════════════════
+
             [
                 'kategori'             => 'Ilmu-ilmu Terapan',
                 'title'                => 'Pemrograman PHP & MySQL untuk Pemula',
@@ -173,6 +365,11 @@ class BukuSeeder extends Seeder
                 'classification'       => '005.133',
                 'subject'              => 'Pemrograman Web',
                 'physical_description' => 'xii, 450 hlm.; 25 cm',
+                'publication_year'     => '2019',
+                'location'             => 'Rak B',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Panduan praktis belajar PHP dan MySQL dari dasar hingga mampu membangun aplikasi web dinamis secara mandiri.',
             ],
             [
                 'kategori'             => 'Ilmu-ilmu Terapan',
@@ -184,6 +381,12 @@ class BukuSeeder extends Seeder
                 'classification'       => '004.6',
                 'subject'              => 'Jaringan Komputer',
                 'physical_description' => 'xxvi, 1028 hlm.; 28 cm',
+                'language'             => 'Inggris',
+                'publication_year'     => '2010',
+                'location'             => 'Rak B',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Referensi komprehensif jaringan komputer yang mencakup model OSI, TCP/IP, protokol, keamanan jaringan, dan nirkabel.',
             ],
             [
                 'kategori'             => 'Ilmu-ilmu Terapan',
@@ -195,6 +398,11 @@ class BukuSeeder extends Seeder
                 'classification'       => '005.133',
                 'subject'              => 'Algoritma Pemrograman',
                 'physical_description' => 'xiv, 586 hlm.; 25 cm',
+                'publication_year'     => '2016',
+                'location'             => 'Rak B',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Buku algoritma dan pemrograman yang banyak digunakan di jurusan ilmu komputer. Membahas struktur data, rekursi, dan pengurutan.',
             ],
             [
                 'kategori'             => 'Ilmu-ilmu Terapan',
@@ -206,9 +414,50 @@ class BukuSeeder extends Seeder
                 'classification'       => '005.1',
                 'subject'              => 'Software Engineering',
                 'physical_description' => 'xxiv, 864 hlm.; 28 cm',
+                'language'             => 'Indonesia',
+                'publication_year'     => '2012',
+                'location'             => 'Rak B',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Buku rekayasa perangkat lunak yang membahas siklus hidup pengembangan perangkat lunak, pengujian, dan manajemen proyek.',
+            ],
+            [
+                'kategori'             => 'Ilmu-ilmu Terapan',
+                'title'                => 'Basis Data',
+                'author'               => 'Fathansyah',
+                'publisher'            => 'Informatika Bandung',
+                'isbn'                 => '978-602-1514-54-9',
+                'call_number'          => '005.74 FAT b',
+                'classification'       => '005.74',
+                'subject'              => 'Basis Data',
+                'physical_description' => 'x, 312 hlm.; 24 cm',
+                'publication_year'     => '2018',
+                'location'             => 'Rak B',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Referensi basis data yang membahas model relasional, normalisasi, SQL, dan sistem manajemen basis data.',
+            ],
+            [
+                'kategori'             => 'Ilmu-ilmu Terapan',
+                'title'                => 'Kecerdasan Buatan',
+                'author'               => 'Sri Kusumadewi',
+                'publisher'            => 'Graha Ilmu',
+                'isbn'                 => '978-979-756-046-8',
+                'call_number'          => '006.3 KUS k',
+                'classification'       => '006.3',
+                'subject'              => 'Kecerdasan Buatan',
+                'physical_description' => 'xii, 278 hlm.; 24 cm',
+                'publication_year'     => '2014',
+                'location'             => 'Rak B',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Membahas konsep kecerdasan buatan, logika fuzzy, jaringan saraf tiruan, dan sistem pakar secara teori dan implementasi.',
             ],
 
-            // ── Kesenian ─────────────────────────────────────────────
+            // ══════════════════════════════════════════
+            // KESENIAN
+            // ══════════════════════════════════════════
+
             [
                 'kategori'             => 'Kesenian',
                 'title'                => 'Seni Rupa Terapan Nusantara',
@@ -219,6 +468,11 @@ class BukuSeeder extends Seeder
                 'classification'       => '745',
                 'subject'              => 'Seni Rupa Indonesia',
                 'physical_description' => 'viii, 210 hlm.; 24 cm; il.',
+                'publication_year'     => '2012',
+                'location'             => 'Rak C',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Menggali kekayaan seni rupa terapan nusantara dari berbagai daerah dengan analisis estetika dan nilai budaya.',
             ],
             [
                 'kategori'             => 'Kesenian',
@@ -229,9 +483,33 @@ class BukuSeeder extends Seeder
                 'classification'       => '780',
                 'subject'              => 'Pendidikan Musik',
                 'physical_description' => 'x, 148 hlm.; 21 cm; not.',
+                'publication_year'     => '2010',
+                'location'             => 'Rak C',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Panduan teori musik dasar untuk tingkat sekolah menengah, mencakup notasi, harmoni, dan sejarah musik.',
+            ],
+            [
+                'kategori'             => 'Kesenian',
+                'title'                => 'Mengenal Batik dan Cara Mudah Membuat Batik',
+                'author'               => 'Ari Wulandari',
+                'publisher'            => 'Narasi',
+                'isbn'                 => '978-979-168-410-0',
+                'call_number'          => '746.662 WUL m',
+                'classification'       => '746.662',
+                'subject'              => 'Batik Indonesia',
+                'physical_description' => 'x, 196 hlm.; 22 cm; il.',
+                'publication_year'     => '2011',
+                'location'             => 'Rak C',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Panduan lengkap mengenal jenis-jenis batik Indonesia beserta filosofi motifnya dan cara membuat batik tulis dan cap.',
             ],
 
-            // ── Hiburan dan Olahraga ─────────────────────────────────
+            // ══════════════════════════════════════════
+            // HIBURAN DAN OLAHRAGA
+            // ══════════════════════════════════════════
+
             [
                 'kategori'             => 'Hiburan dan Olahraga',
                 'title'                => 'Panduan Lengkap Sepak Bola',
@@ -242,6 +520,11 @@ class BukuSeeder extends Seeder
                 'classification'       => '796.334',
                 'subject'              => 'Sepak Bola',
                 'physical_description' => 'xiv, 242 hlm.; 23 cm; il.',
+                'publication_year'     => '2011',
+                'location'             => 'Rak C',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Panduan teknik dan taktik sepak bola lengkap, dari passing, dribbling, shooting, hingga strategi tim.',
             ],
             [
                 'kategori'             => 'Hiburan dan Olahraga',
@@ -252,9 +535,32 @@ class BukuSeeder extends Seeder
                 'classification'       => '796.345',
                 'subject'              => 'Bulu Tangkis',
                 'physical_description' => 'viii, 178 hlm.; 21 cm; il.',
+                'publication_year'     => '2008',
+                'location'             => 'Rak C',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Panduan teknik dasar bulu tangkis meliputi pegangan raket, footwork, pukulan, dan latihan fisik.',
+            ],
+            [
+                'kategori'             => 'Hiburan dan Olahraga',
+                'title'                => 'Renang: Teknik, Analisa, dan Target',
+                'author'               => 'Soejoko Hendromartono',
+                'publisher'            => 'Depdikbud',
+                'call_number'          => '797.21 SOE r',
+                'classification'       => '797.21',
+                'subject'              => 'Olahraga Renang',
+                'physical_description' => 'x, 164 hlm.; 21 cm; il.',
+                'publication_year'     => '2009',
+                'location'             => 'Rak C',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Buku teknik renang yang membahas gaya bebas, punggung, dada, dan kupu-kupu disertai analisa gerakan.',
             ],
 
-            // ── Agama ────────────────────────────────────────────────
+            // ══════════════════════════════════════════
+            // AGAMA
+            // ══════════════════════════════════════════
+
             [
                 'kategori'             => 'Agama',
                 'title'                => 'Tafsir Al-Mishbah Volume 1',
@@ -265,6 +571,11 @@ class BukuSeeder extends Seeder
                 'classification'       => '297.12',
                 'subject'              => 'Tafsir Al-Quran',
                 'physical_description' => 'xlii, 624 hlm.; 24 cm',
+                'publication_year'     => '2009',
+                'location'             => 'Rak A',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Tafsir Al-Quran kontemporer karya ulama Indonesia yang memadukan tafsir klasik dengan konteks kehidupan modern.',
             ],
             [
                 'kategori'             => 'Agama',
@@ -275,6 +586,11 @@ class BukuSeeder extends Seeder
                 'classification'       => '297.4',
                 'subject'              => 'Hadits',
                 'physical_description' => 'xvi, 826 hlm.; 24 cm',
+                'publication_year'     => '2010',
+                'location'             => 'Rak A',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Kumpulan hadits-hadits Nabi Muhammad SAW yang berkaitan dengan akhlak mulia dan amal saleh sehari-hari.',
             ],
             [
                 'kategori'             => 'Agama',
@@ -286,9 +602,32 @@ class BukuSeeder extends Seeder
                 'classification'       => '297.5',
                 'subject'              => 'Fiqih Islam',
                 'physical_description' => 'xxiv, 732 hlm.; 24 cm',
+                'publication_year'     => '2010',
+                'location'             => 'Rak A',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Ensiklopedia fiqih Islam komprehensif yang membahas hukum-hukum Islam beserta dalil dari Al-Quran dan Sunnah.',
+            ],
+            [
+                'kategori'             => 'Agama',
+                'title'                => 'Ihya Ulumuddin Jilid 1',
+                'author'               => 'Imam Al-Ghazali',
+                'publisher'            => 'Pustaka Nasional',
+                'call_number'          => '297.4 GHA i',
+                'classification'       => '297.4',
+                'subject'              => 'Tasawuf Islam',
+                'physical_description' => 'xx, 612 hlm.; 24 cm',
+                'publication_year'     => '2011',
+                'location'             => 'Rak A',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Karya monumental Al-Ghazali yang membahas ilmu-ilmu agama Islam, meliputi ibadah, adat, dan akhlak mulia.',
             ],
 
-            // ── Filsafat ─────────────────────────────────────────────
+            // ══════════════════════════════════════════
+            // FILSAFAT
+            // ══════════════════════════════════════════
+
             [
                 'kategori'             => 'Filsafat',
                 'title'                => 'Logika: Ilmu Memikir',
@@ -299,6 +638,11 @@ class BukuSeeder extends Seeder
                 'classification'       => '160',
                 'subject'              => 'Logika Filsafat',
                 'physical_description' => 'x, 212 hlm.; 21 cm',
+                'publication_year'     => '2011',
+                'location'             => 'Rak C',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Buku pengantar logika yang membahas penalaran deduktif, induktif, silogisme, dan kesalahan berpikir.',
             ],
             [
                 'kategori'             => 'Filsafat',
@@ -310,9 +654,33 @@ class BukuSeeder extends Seeder
                 'classification'       => '121',
                 'subject'              => 'Filsafat Ilmu',
                 'physical_description' => 'xvi, 372 hlm.; 21 cm',
+                'publication_year'     => '2013',
+                'location'             => 'Rak C',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Pengantar filsafat ilmu yang mengupas ontologi, epistemologi, dan aksiologi ilmu pengetahuan secara populer dan mudah dipahami.',
+            ],
+            [
+                'kategori'             => 'Filsafat',
+                'title'                => 'Sejarah Filsafat Yunani',
+                'author'               => 'K. Bertens',
+                'publisher'            => 'Kanisius',
+                'isbn'                 => '978-979-497-246-0',
+                'call_number'          => '180 BER s',
+                'classification'       => '180',
+                'subject'              => 'Filsafat Yunani',
+                'physical_description' => 'xii, 264 hlm.; 21 cm',
+                'publication_year'     => '2014',
+                'location'             => 'Rak C',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Menelusuri perkembangan pemikiran para filsuf Yunani kuno dari Thales hingga Aristoteles secara kronologis.',
             ],
 
-            // ── Ilmu Pengetahuan Alam ────────────────────────────────
+            // ══════════════════════════════════════════
+            // ILMU PENGETAHUAN ALAM
+            // ══════════════════════════════════════════
+
             [
                 'kategori'             => 'Ilmu Pengetahuan Alam',
                 'title'                => 'Kimia Dasar Konsep-Konsep Inti Jilid 1',
@@ -323,6 +691,11 @@ class BukuSeeder extends Seeder
                 'classification'       => '540',
                 'subject'              => 'Kimia Dasar',
                 'physical_description' => 'xvi, 498 hlm.; 28 cm; il.',
+                'publication_year'     => '2005',
+                'location'             => 'Rak B',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Buku teks kimia dasar yang digunakan secara luas di perguruan tinggi, membahas stoikiometri, termokimia, dan elektrokimia.',
             ],
             [
                 'kategori'             => 'Ilmu Pengetahuan Alam',
@@ -334,6 +707,11 @@ class BukuSeeder extends Seeder
                 'classification'       => '530',
                 'subject'              => 'Fisika Dasar',
                 'physical_description' => 'xiv, 522 hlm.; 28 cm; il.',
+                'publication_year'     => '2010',
+                'location'             => 'Rak B',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Buku fisika dasar klasik yang membahas mekanika, termodinamika, gelombang, dan optik secara mendalam.',
             ],
             [
                 'kategori'             => 'Ilmu Pengetahuan Alam',
@@ -345,6 +723,11 @@ class BukuSeeder extends Seeder
                 'classification'       => '570',
                 'subject'              => 'Biologi Umum',
                 'physical_description' => 'xxiv, 512 hlm.; 28 cm; il.',
+                'publication_year'     => '2010',
+                'location'             => 'Rak B',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Referensi biologi umum terlengkap yang membahas sel, genetika, evolusi, ekologi, dan keanekaragaman makhluk hidup.',
             ],
             [
                 'kategori'             => 'Ilmu Pengetahuan Alam',
@@ -356,9 +739,33 @@ class BukuSeeder extends Seeder
                 'classification'       => '515',
                 'subject'              => 'Kalkulus',
                 'physical_description' => 'xii, 532 hlm.; 28 cm',
+                'publication_year'     => '2003',
+                'location'             => 'Rak B',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Buku teks kalkulus yang membahas limit, turunan, integral, dan aplikasinya dalam sains dan teknik.',
+            ],
+            [
+                'kategori'             => 'Ilmu Pengetahuan Alam',
+                'title'                => 'Statistika untuk Penelitian',
+                'author'               => 'Sugiyono',
+                'publisher'            => 'Alfabeta',
+                'isbn'                 => '978-979-8433-10-8',
+                'call_number'          => '519.5 SUG s',
+                'classification'       => '519.5',
+                'subject'              => 'Statistika',
+                'physical_description' => 'xiv, 390 hlm.; 23 cm',
+                'publication_year'     => '2017',
+                'location'             => 'Rak B',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Panduan statistika untuk penelitian ilmiah yang membahas statistika deskriptif, inferensial, dan uji hipotesis.',
             ],
 
-            // ── Geografi dan Sejarah ─────────────────────────────────
+            // ══════════════════════════════════════════
+            // GEOGRAFI DAN SEJARAH
+            // ══════════════════════════════════════════
+
             [
                 'kategori'             => 'Geografi dan Sejarah',
                 'title'                => 'Sejarah Indonesia Modern 1200-2008',
@@ -369,6 +776,11 @@ class BukuSeeder extends Seeder
                 'classification'       => '959.8',
                 'subject'              => 'Sejarah Indonesia',
                 'physical_description' => 'xiv, 766 hlm.; 24 cm; il.',
+                'publication_year'     => '2009',
+                'location'             => 'Rak C',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Sejarah Indonesia modern yang paling komprehensif dalam bahasa Indonesia, mencakup periode Hindu-Buddha hingga era reformasi.',
             ],
             [
                 'kategori'             => 'Geografi dan Sejarah',
@@ -379,9 +791,32 @@ class BukuSeeder extends Seeder
                 'classification'       => '910',
                 'subject'              => 'Geografi Regional',
                 'physical_description' => 'x, 312 hlm.; 21 cm; il.',
+                'publication_year'     => '2007',
+                'location'             => 'Rak C',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Membahas kondisi fisik, sosial, ekonomi, dan budaya kawasan-kawasan utama di seluruh dunia.',
+            ],
+            [
+                'kategori'             => 'Geografi dan Sejarah',
+                'title'                => 'Atlas Indonesia dan Dunia',
+                'author'               => 'Tim Kartografi Bakosurtanal',
+                'publisher'            => 'Badan Koordinasi Survei dan Pemetaan Nasional',
+                'call_number'          => '912 ATL',
+                'classification'       => '912',
+                'subject'              => 'Atlas Geografi',
+                'physical_description' => 'xvi, 248 hlm.; 30 cm; il.',
+                'publication_year'     => '2015',
+                'location'             => 'Perpustakaan Utama',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Atlas lengkap peta Indonesia per provinsi dan peta negara-negara di seluruh dunia.',
             ],
 
-            // ── Lainnya ──────────────────────────────────────────────
+            // ══════════════════════════════════════════
+            // LAINNYA
+            // ══════════════════════════════════════════
+
             [
                 'kategori'             => 'Lainnya',
                 'title'                => 'Kamus Besar Bahasa Indonesia Edisi Kelima',
@@ -392,6 +827,11 @@ class BukuSeeder extends Seeder
                 'classification'       => '499.221',
                 'subject'              => 'Kamus Bahasa Indonesia',
                 'physical_description' => 'xcvii, 1701 hlm.; 29 cm',
+                'publication_year'     => '2016',
+                'location'             => 'Perpustakaan Utama',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Kamus resmi Bahasa Indonesia edisi terbaru yang memuat lebih dari 100.000 kata dan istilah.',
             ],
             [
                 'kategori'             => 'Lainnya',
@@ -402,6 +842,43 @@ class BukuSeeder extends Seeder
                 'classification'       => '808',
                 'subject'              => 'Penulisan Ilmiah',
                 'physical_description' => 'xii, 196 hlm.; 21 cm',
+                'publication_year'     => '2009',
+                'location'             => 'Perpustakaan Utama',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Panduan menulis karya ilmiah yang baik dan benar, mencakup makalah, skripsi, tesis, dan artikel jurnal.',
+            ],
+            [
+                'kategori'             => 'Lainnya',
+                'title'                => 'Metodologi Penelitian Kuantitatif, Kualitatif, dan R&D',
+                'author'               => 'Sugiyono',
+                'publisher'            => 'Alfabeta',
+                'isbn'                 => '978-979-8433-64-1',
+                'call_number'          => '001.4 SUG m',
+                'classification'       => '001.4',
+                'subject'              => 'Metodologi Penelitian',
+                'physical_description' => 'xiv, 456 hlm.; 23 cm',
+                'publication_year'     => '2019',
+                'location'             => 'Perpustakaan Utama',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Buku metodologi penelitian paling banyak dirujuk di Indonesia, membahas pendekatan kuantitatif, kualitatif, dan mixed method.',
+            ],
+            [
+                'kategori'             => 'Lainnya',
+                'title'                => 'Tata Bahasa Baku Bahasa Indonesia Edisi Keempat',
+                'author'               => 'Anton M. Moeliono dkk.',
+                'publisher'            => 'Badan Pengembangan dan Pembinaan Bahasa',
+                'isbn'                 => '978-979-069-235-8',
+                'call_number'          => '499.221 TAT',
+                'classification'       => '499.221',
+                'subject'              => 'Tata Bahasa Indonesia',
+                'physical_description' => 'xlii, 612 hlm.; 25 cm',
+                'publication_year'     => '2017',
+                'location'             => 'Perpustakaan Utama',
+                'collection_type'      => 'buku',
+                'gmd_type'             => 'Teks',
+                'description'          => 'Buku tata bahasa baku resmi Bahasa Indonesia sebagai acuan penggunaan bahasa yang baik dan benar.',
             ],
         ];
     }

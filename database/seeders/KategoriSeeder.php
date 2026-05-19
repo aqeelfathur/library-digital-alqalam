@@ -11,16 +11,16 @@ class KategoriSeeder extends Seeder
     public function run(): void
     {
         $kategori = [
-            'Kesusastraan',
-            'Ilmu-ilmu Sosial',
-            'Ilmu-ilmu Terapan',
-            'Kesenian',
-            'Hiburan dan Olahraga',
-            'Agama',
+            'Karya Umum',
             'Filsafat',
-            'Ilmu Pengetahuan Alam',
+            'Agama',
+            'Ilmu-ilmu Sosial',
+            'Bahasa',
+            'Ilmu-ilmu Murni',
+            'Ilmu-ilmu Terapan',
+            'Kesenian, Hiburan, dan Olahraga',
+            'Kesusastraan',
             'Geografi dan Sejarah',
-            'Lainnya',
         ];
 
         foreach ($kategori as $nama) {

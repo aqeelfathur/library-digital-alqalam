@@ -56,6 +56,11 @@ class BukuFactory extends Factory
             'carrier_type' => 'Volume',
             'status'       => 'tersedia',
             'image_url'    => null,
+            'publication_year' => fake()->optional(0.8)->numberBetween(1990, 2024),
+            'location'         => fake()->optional(0.7)->randomElement(['Rak A', 'Rak B', 'Rak C', 'Perpustakaan Utama']),
+            'collection_type'  => fake()->optional(0.9)->randomElement(['buku', 'majalah', 'jurnal', 'ebook']),
+            'gmd_type'         => fake()->optional(0.8)->randomElement(['Teks', 'Audio', 'Video', 'Digital']),
+            'description'      => fake()->optional(0.6)->sentences(2, true),
         ];
     }
 
