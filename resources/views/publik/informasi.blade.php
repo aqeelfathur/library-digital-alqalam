@@ -66,9 +66,9 @@
             {{-- Informasi Keanggotaan --}}
             <div class="lg:col-span-2">
                 <div class="bg-white rounded-xl border border-stone-100 shadow-sm p-6">
-                    <h2 class="font-semibold text-stone-800 mb-4">Informasi Keanggotaan</h2>
+                    <h2 class="font-semibold text-stone-800">Informasi Keanggotaan</h2>
                     <div class="prose prose-sm prose-stone max-w-none">
-                        <p class="text-stone-600 leading-relaxed whitespace-pre-line">
+                        <p class="text-stone-600 leading-relaxed whitespace-pre-line m-0">
                             {{ $informasi->membership_information ?? 'Hubungi pustakawan untuk informasi keanggotaan.' }}
                         </p>
                     </div>
