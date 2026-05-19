@@ -77,10 +77,17 @@
                 @if($informasi->maps_embed_url)
                     <div class="mt-5 bg-white rounded-xl border border-stone-100 shadow-sm overflow-hidden">
                         <div class="p-4 border-b border-stone-100">
-                            <h2 class="font-semibold text-stone-800">Lokasi di Peta</h2>
+                            <h2 class="font-semibold text-stone-800">Maps</h2>
                         </div>
-                        <div class="h-72">
-                            {!! $informasi->maps_embed_url !!}
+                        <div class="w-full h-72">
+                            <iframe
+                                src="{{ $informasi->maps_embed_url }}"
+                                class="w-full h-full"
+                                style="border:0;"
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                                allowfullscreen
+                            ></iframe>
                         </div>
                     </div>
                 @endif
