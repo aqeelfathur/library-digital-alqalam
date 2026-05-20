@@ -3,32 +3,70 @@
 <x-layouts.publik title="Beranda — Perpustakaan Digital Al-Qalam">
 
     {{-- HERO --}}
-    <section class="relative overflow-hidden bg-gradient-to-br from-emerald-900 via-emerald-800 to-teal-900 min-h-[520px] flex items-center">
-        <div class="absolute inset-0 opacity-10"
-             style="background-image: url('data:image/svg+xml,<svg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"><g fill=\"none\" fill-rule=\"evenodd\"><g fill=\"%23ffffff\" fill-opacity=\"0.4\"><path d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/></g></g></svg>');">
-        </div>
+    <section 
+        x-data="{
+            current: 0,
+            banners: [
+                '{{ asset('images/smamda-banner1.png') }}',
+                '{{ asset('images/smamda-banner2.png') }}'
+            ]
+        }"
+        x-init="setInterval(() => current = (current + 1) % banners.length, 5000)"
+        class="relative overflow-hidden min-h-[520px] flex items-center pt-16"
+    >
 
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
+        {{-- Background Images --}}
+        <template x-for="(banner, index) in banners" :key="index">
+            <div
+                x-show="current === index"
+                x-transition:enter="transition-opacity duration-1000"
+                x-transition:enter-start="opacity-0"
+                x-transition:enter-end="opacity-100"
+                x-transition:leave="transition-opacity duration-1000 absolute inset-0"
+                x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0"
+                class="absolute inset-0"
+            >
+                <img
+                    :src="banner"
+                    class="w-full h-full object-cover"
+                    alt="Banner"
+                >
+            </div>
+        </template>
+
+        {{-- Overlay --}}
+        <div class="absolute inset-0 bg-black/50"></div>
+
+        {{-- HERO CONTENT --}}
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
+
             <div class="text-center text-white mb-10">
-                <span class="inline-block text-xs font-semibold tracking-widest uppercase text-emerald-300 mb-4">
-                    Perpustakaan Digital Sekolah
-                </span>
                 <h1 class="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">
-                    Gerbang Ilmu <em class="text-emerald-300 not-italic">Al-Qalam</em>
+                    Perpustakaan SMAMDA Surabaya
                 </h1>
-                <p class="text-emerald-100 text-lg max-w-xl mx-auto mb-8">
+
+                <p class="text-white text-lg max-w-xl mx-auto mb-8">
                     Temukan ribuan koleksi buku pilihan. Pinjam, baca, dan kembangkan pengetahuan Anda.
                 </p>
             </div>
 
-            {{-- Search Bar Utama --}}
+            {{-- Search Bar --}}
             <div class="max-w-3xl mx-auto">
                 <form action="{{ route('explore') }}" method="GET">
                     <div class="flex gap-0 bg-white rounded-2xl shadow-2xl overflow-hidden">
+
                         <div class="flex-1 flex items-center gap-3 px-5">
-                            <svg class="w-5 h-5 text-stone-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                            <svg class="w-5 h-5 text-stone-400 flex-shrink-0"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                             </svg>
+
                             <input
                                 name="search"
                                 type="text"
@@ -37,22 +75,18 @@
                                 autocomplete="off"
                             />
                         </div>
+
                         <button type="submit"
                                 class="px-7 py-4 bg-emerald-700 hover:bg-emerald-800 text-white font-semibold text-sm transition-colors flex-shrink-0">
                             Cari
                         </button>
-                    </div>
-                    <div class="mt-3 flex flex-wrap items-center justify-center gap-2 text-xs text-emerald-300">
-                        <span>Cari berdasarkan:</span>
-                        @foreach(['Judul', 'Pengarang', 'Subjek', 'ISBN', 'Penerbit'] as $hint)
-                            <span class="bg-white/10 px-2 py-0.5 rounded-full">{{ $hint }}</span>
-                        @endforeach
+
                     </div>
                 </form>
             </div>
+
         </div>
     </section>
-    {{-- ↑ HERO: tag </section> ada di sini, bukan di tengah --}}
 
     {{-- KATEGORI --}}
     <section class="py-16 bg-white">
@@ -96,8 +130,84 @@
         </div>
     </section>
 
-    {{-- KOLEKSI TERBARU --}}
+    {{-- REKOMENDASI BUKU --}}
+    @if($bukuRekomendasi->isNotEmpty())
     <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            {{-- Header --}}
+            <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="text-xs font-semibold text-emerald-600 uppercase tracking-widest font-jakarta">Paling Banyak Dipinjam</span>
+                    </div>
+                    <h2 class="font-playfair text-3xl font-bold text-stone-800 mb-2">Rekomendasi Buku</h2>
+                    <p class="text-stone-500 text-sm">Koleksi terpopuler pilihan anggota perpustakaan kami</p>
+                </div>
+            </div>
+
+            {{-- Grid 6 Buku --}}
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-5">
+                @foreach($bukuRekomendasi as $urutan => $buku)
+                <div class="group relative flex flex-col">
+
+                    {{-- Badge Ranking --}}
+                    <div class="absolute -top-2 -left-2 z-10">
+                        @if($urutan === 0)
+                            <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-amber-400 text-white text-xs font-bold shadow-md font-jakarta">#1</span>
+                        @elseif($urutan === 1)
+                            <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-stone-400 text-white text-xs font-bold shadow-md font-jakarta">#2</span>
+                        @elseif($urutan === 2)
+                            <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-amber-700 text-white text-xs font-bold shadow-md font-jakarta">#3</span>
+                        @else
+                            <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-stone-200 text-stone-600 text-xs font-bold shadow font-jakarta">#{{ $urutan + 1 }}</span>
+                        @endif
+                    </div>
+
+                    {{-- Cover Buku --}}
+                    <a href="{{ route('explore') }}?search={{ urlencode($buku->title) }}"
+                       class="block overflow-hidden rounded-xl shadow-md transition-all duration-300 group-hover:shadow-xl group-hover:-translate-y-1 bg-stone-200 aspect-[2/3] relative">
+
+                        <img src="{{ $buku->sampulUrl() }}"
+                             alt="Sampul {{ $buku->title }}"
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             loading="lazy">
+
+                        {{-- Overlay hover --}}
+                        <div class="absolute inset-0 bg-gradient-to-t from-stone-900/80 via-stone-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-3">
+                            <span class="inline-flex items-center gap-1 text-white/90 text-xs font-jakarta font-medium">
+                                <svg class="w-3 h-3 text-emerald-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
+                                </svg>
+                                {{ $buku->peminjaman_count ?? 0 }}× dipinjam
+                            </span>
+                        </div>
+                    </a>
+
+                    {{-- Info Buku --}}
+                    <div class="mt-3 flex-1 flex flex-col">
+                        <h3 class="font-playfair text-xs sm:text-sm font-semibold text-stone-800 leading-snug line-clamp-2 group-hover:text-emerald-700 transition-colors">
+                            <a href="{{ route('explore') }}?search={{ urlencode($buku->title) }}">
+                                {{ $buku->title }}
+                            </a>
+                        </h3>
+                        <p class="mt-1 text-xs text-stone-500 font-jakarta line-clamp-1">{{ $buku->author }}</p>
+                        @if($buku->kategori)
+                            <span class="mt-2 inline-block self-start text-xs px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-jakarta font-medium border border-emerald-100 leading-none">
+                                {{ $buku->kategori->name }}
+                            </span>
+                        @endif
+                    </div>
+                </div>
+                @endforeach
+            </div>
+
+        </div>
+    </section>
+    @endif
+
+    {{-- KOLEKSI TERBARU --}}
+    <section class="py-16 bg-stone-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-8 gap-4">
                 <div>
@@ -158,7 +268,14 @@
                     <p class="text-stone-500 text-sm">Kunjungi perpustakaan kami secara langsung</p>
                 </div>
                 <div class="rounded-2xl overflow-hidden shadow-lg h-80">
-                    {!! $informasi->maps_embed_url !!}
+                    <iframe
+                        src="{{ $informasi->maps_embed_url }}"
+                        class="w-full h-full"
+                        style="border:0;"
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        allowfullscreen
+                    ></iframe>
                 </div>
             </div>
         </section>

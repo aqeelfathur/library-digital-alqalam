@@ -1,22 +1,43 @@
+{{-- resources/views/components/publik/navbar.blade.php --}}
+
 @props(['areaAnggota' => false])
 
 <nav
-    class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-stone-200 shadow-sm"
-    x-data="{ menuTerbuka: false }"
+    class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+    x-data="{
+        menuTerbuka: false,
+        scrolled: false,
+        init() {
+            window.addEventListener('scroll', () => {
+                this.scrolled = window.scrollY > 40
+            })
+        }
+    }"
+    :class="scrolled
+        ? 'bg-white/95 backdrop-blur border-b border-stone-200 shadow-sm'
+        : 'bg-transparent border-b border-white/10'"
 >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
 
             {{-- Logo --}}
             <a href="{{ route('beranda') }}" class="flex items-center gap-3 group">
-                <div class="w-9 h-9 bg-emerald-700 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                    </svg>
+                <div class="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <img
+                        src="{{ asset('images/smamda-logo.png') }}"
+                        alt="Logo"
+                        class="w-12 h-12 object-contain"
+                    />
                 </div>
                 <div>
-                    <p class="font-playfair font-bold text-emerald-800 text-lg leading-none">Al-Qalam</p>
-                    <p class="text-xs text-stone-500 leading-none mt-0.5">Perpustakaan Digital</p>
+                    <p class="font-playfair font-bold text-lg leading-none transition-colors duration-300"
+                       :class="scrolled ? 'text-black' : 'text-white'">
+                        Perpustakaan Al Qalam SMA Muhammadiyah 2 Surabaya
+                    </p>
+                    <p class="text-xs leading-none mt-0.5 transition-colors duration-300"
+                       :class="scrolled ? 'text-stone-500' : 'text-white/70'">
+                        Perpustakaan
+                    </p>
                 </div>
             </a>
 
@@ -36,8 +57,11 @@
                 @foreach($menuNav as $item)
                     <a
                         href="{{ route($item['rute']) }}"
-                        class="text-sm font-medium transition-colors
-                               {{ request()->routeIs($item['aktif']) ? 'text-emerald-700' : 'text-stone-600 hover:text-emerald-700' }}"
+                        class="text-sm font-medium transition-colors duration-300
+                               {{ request()->routeIs($item['aktif'])
+                                    ? 'text-grey-600'
+                                    : '' }}"
+                        :class="!{{ request()->routeIs($item['aktif']) ? 'true' : 'false' }} && (scrolled ? 'text-stone-600 hover:text-emerald-700' : 'text-white/90 hover:text-white')"
                     >
                         {{ $item['label'] }}
                     </a>
@@ -49,37 +73,42 @@
                 @auth
                     @if(auth()->user()->isAnggota())
                         <a href="{{ route('anggota.dasbor') }}"
-                           class="text-sm font-medium text-emerald-700 hover:text-emerald-800 transition-colors">
+                           class="text-sm font-medium transition-colors duration-300"
+                           :class="scrolled ? 'text-emerald-700 hover:text-emerald-800' : 'text-white/90 hover:text-white'">
                             Dasbor Saya
                         </a>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit"
-                                    class="text-sm px-4 py-2 border border-stone-300 rounded-lg text-stone-600 hover:bg-stone-100 transition-colors">
+                                    class="text-sm px-4 py-2 rounded-lg transition-colors duration-300"
+                                    :class="scrolled
+                                        ? 'border border-stone-300 text-stone-600 hover:bg-stone-100'
+                                        : 'border border-white/40 text-white hover:bg-white/10'">
                                 Keluar
                             </button>
                         </form>
                     @elseif(auth()->user()->isPustakawan())
                         <a href="{{ route('pustakawan.dasbor') }}"
-                           class="text-sm font-medium text-emerald-700 hover:text-emerald-800 transition-colors">
+                           class="text-sm font-medium transition-colors duration-300"
+                           :class="scrolled ? 'text-emerald-700 hover:text-emerald-800' : 'text-white/90 hover:text-white'">
                             Panel Pustakawan
                         </a>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit"
-                                    class="text-sm px-4 py-2 border border-stone-300 rounded-lg text-stone-600 hover:bg-stone-100 transition-colors">
+                                    class="text-sm px-4 py-2 rounded-lg transition-colors duration-300"
+                                    :class="scrolled
+                                        ? 'border border-stone-300 text-stone-600 hover:bg-stone-100'
+                                        : 'border border-white/40 text-white hover:bg-white/10'">
                                 Keluar
                             </button>
                         </form>
                     @endif
                 @else
                     <a href="{{ route('anggota.login') }}"
-                       class="text-sm font-medium text-stone-600 hover:text-emerald-700 transition-colors">
+                       class="text-sm font-medium transition-colors duration-300"
+                       :class="scrolled ? 'text-stone-600 hover:text-emerald-700' : 'text-white/90 hover:text-white'">
                         Masuk
-                    </a>
-                    <a href="{{ route('anggota.login') }}"
-                       class="text-sm px-4 py-2 bg-emerald-700 text-white rounded-lg hover:bg-emerald-800 transition-colors font-medium">
-                        Daftar
                     </a>
                 @endauth
             </div>
@@ -87,7 +116,8 @@
             {{-- Tombol Hamburger Mobile --}}
             <button
                 @click="menuTerbuka = !menuTerbuka"
-                class="md:hidden p-2 rounded-lg text-stone-600 hover:bg-stone-100 transition-colors"
+                class="md:hidden p-2 rounded-lg transition-colors duration-300"
+                :class="scrolled ? 'text-stone-600 hover:bg-stone-100' : 'text-white hover:bg-white/10'"
                 aria-label="Menu"
             >
                 <svg x-show="!menuTerbuka" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -101,13 +131,16 @@
     </div>
 
     {{-- Menu Mobile --}}
-    <div x-show="menuTerbuka" x-collapse x-cloak class="md:hidden border-t border-stone-200 bg-white">
+    <div x-show="menuTerbuka" x-collapse x-cloak class="md:hidden border-t bg-white"
+         :class="scrolled ? 'border-stone-200' : 'border-white/20'">
         <div class="px-4 py-4 space-y-1">
             @foreach($menuNav as $item)
                 <a
                     href="{{ route($item['rute']) }}"
                     class="block px-3 py-2.5 text-sm rounded-lg transition-colors
-                           {{ request()->routeIs($item['aktif']) ? 'bg-emerald-50 text-emerald-700 font-medium' : 'text-stone-700 hover:bg-stone-100' }}"
+                           {{ request()->routeIs($item['aktif'])
+                                ? 'bg-emerald-50 text-emerald-700 font-medium'
+                                : 'text-stone-700 hover:bg-stone-100' }}"
                 >
                     {{ $item['label'] }}
                 </a>
@@ -145,10 +178,6 @@
                         <a href="{{ route('anggota.login') }}"
                            class="flex-1 text-center py-2.5 text-sm border border-stone-300 rounded-lg text-stone-600 hover:bg-stone-50 transition-colors">
                             Masuk
-                        </a>
-                        <a href="{{ route('anggota.login') }}"
-                           class="flex-1 text-center py-2.5 text-sm bg-emerald-700 text-white rounded-lg font-medium hover:bg-emerald-800 transition-colors">
-                            Daftar
                         </a>
                     </div>
                 @endauth

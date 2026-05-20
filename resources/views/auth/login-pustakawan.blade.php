@@ -2,13 +2,8 @@
     <div class="min-h-screen bg-gradient-to-br from-emerald-900 to-teal-900 flex items-center justify-center py-12 px-4">
         <div class="w-full max-w-md">
             <div class="text-center mb-8">
-                <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-white/20">
-                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                    </svg>
-                </div>
-                <h1 class="font-playfair text-3xl font-bold text-white mb-1">Panel Pustakawan</h1>
-                <p class="text-emerald-300 text-sm">Masuk dengan akun pustakawan Anda</p>
+
+                <h1 class="font-playfair text-3xl font-bold text-white mb-1">Masuk Otomasi Perpustakaan | Perpustakaan Al Qalam SMA Muhammadiyah 2 Surabaya</h1>
             </div>
 
             <div class="bg-white rounded-2xl shadow-2xl p-8">

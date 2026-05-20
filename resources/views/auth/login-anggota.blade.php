@@ -4,15 +4,8 @@
 
             {{-- Header --}}
             <div class="text-center mb-8">
-                <a href="{{ route('beranda') }}" class="inline-flex items-center gap-3 mb-6">
-                    <div class="w-12 h-12 bg-emerald-700 rounded-xl flex items-center justify-center">
-                        <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                        </svg>
-                    </div>
-                </a>
-                <h1 class="font-playfair text-3xl font-bold text-stone-800 mb-1">Selamat Datang</h1>
-                <p class="text-stone-500 text-sm">Masuk ke akun anggota perpustakaan Anda</p>
+                <h1 class="font-playfair text-3xl font-bold text-stone-800 mb-1">Masuk Anggota Perpustakaan</h1>
+                <p class="text-stone-500 text-sm">Masukan ID anggota serta kata sandi yang diberikan oleh administrator sistem perpustakaan. Jika Anda anggota perpustakaan namun belum memiliki kata sandi, hubungi staf perpustakaan.</p>
             </div>
 
             {{-- Kartu Form --}}
