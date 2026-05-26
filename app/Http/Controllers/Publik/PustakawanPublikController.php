@@ -15,6 +15,8 @@ class PustakawanPublikController extends Controller
             ->aktif()
             ->get();
 
-        return view('publik.pustakawan', compact('pustakawan'));
+        $judulHalaman = "Pustakawan";
+
+        return view('publik.pustakawan', compact('pustakawan', 'judulHalaman'));
     }
 }

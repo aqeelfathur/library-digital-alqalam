@@ -18,7 +18,8 @@ class BeritaController extends Controller
             ->paginate(9)
             ->withQueryString();
 
-        return view('publik.berita.index', compact('berita'));
+        $judulHalaman = "Berita";    
+        return view('publik.berita.index', compact('berita', 'judulHalaman'));
     }
 
     public function show(Berita $berita): View

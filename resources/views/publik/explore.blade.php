@@ -1,14 +1,14 @@
 <x-layouts.publik :title="$judulHalaman . ' — Perpustakaan Al-Qalam'">
 
     {{-- BREADCRUMB --}}
-    <div class="bg-stone-100 border-b border-stone-200">
+    <div class="pt-16 bg-emerald-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-            <nav class="flex items-center gap-2 text-xs text-stone-500">
+            <nav class="flex items-center gap-2 text-xs text-white">
                 <a href="{{ route('beranda') }}" class="hover:text-emerald-700 transition-colors">Beranda</a>
                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                 </svg>
-                <span class="text-stone-700 font-medium">{{ $judulHalaman }}</span>
+                <span class="text-white font-medium">{{ $judulHalaman }}</span>
             </nav>
         </div>
     </div>

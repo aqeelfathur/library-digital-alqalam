@@ -9,6 +9,7 @@ class BantuanController extends Controller
 {
     public function index(): View
     {
-        return view('publik.bantuan');
+        $judulHalaman = "Bantuan";
+        return view('publik.bantuan', compact('judulHalaman'));
     }
 }

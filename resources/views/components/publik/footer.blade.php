@@ -4,27 +4,21 @@
 
             {{-- Brand --}}
             <div class="md:col-span-1">
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="w-9 h-9 bg-emerald-600 rounded-lg flex items-center justify-center">
-                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <p class="font-playfair font-bold text-white text-lg leading-none">Al-Qalam</p>
-                        <p class="text-xs text-emerald-300 leading-none mt-0.5">Perpustakaan Digital</p>
-                    </div>
+                <div class="gap-3 mb-4">
+                    <img
+                        src="{{ asset('images/smamda-logo.png') }}"
+                        alt="Logo"
+                        class="w-16 h-16 object-contain"
+                    />
                 </div>
-                <p class="text-sm text-emerald-200 leading-relaxed">
-                    Perpustakaan digital sekolah yang menyediakan koleksi buku berkualitas untuk mendukung pembelajaran.
-                </p>
+                <p class="font-playfair font-bold text-white text-lg leading-none">Perpustakaan Al Qalam SMA Muhammadiyah 2 Surabaya</p>
             </div>
 
             {{-- Tautan Cepat --}}
             <div>
                 <h4 class="font-semibold text-white mb-4 text-sm uppercase tracking-wider">Tautan Cepat</h4>
                 <ul class="space-y-2">
-                    @foreach([['beranda', 'Beranda'], ['informasi', 'Informasi'], ['berita.index', 'Berita'], ['bantuan', 'Bantuan'], ['pustakawan.profil', 'Pustakawan']] as [$rute, $label])
+                    @foreach([['beranda', 'Beranda'], ['explore', 'Koleksi'], ['informasi', 'Informasi'], ['berita.index', 'Berita'], ['bantuan', 'Bantuan'], ['pustakawan.profil', 'Pustakawan']] as [$rute, $label])
                         <li>
                             <a href="{{ route($rute) }}" class="text-sm text-emerald-300 hover:text-white transition-colors">
                                 {{ $label }}

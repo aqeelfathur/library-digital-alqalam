@@ -59,7 +59,7 @@
                         href="{{ route($item['rute']) }}"
                         class="text-sm font-medium transition-colors duration-300
                                {{ request()->routeIs($item['aktif'])
-                                    ? 'text-grey-600'
+                                    ? 'text-emerald-300'
                                     : '' }}"
                         :class="!{{ request()->routeIs($item['aktif']) ? 'true' : 'false' }} && (scrolled ? 'text-stone-600 hover:text-emerald-700' : 'text-white/90 hover:text-white')"
                     >

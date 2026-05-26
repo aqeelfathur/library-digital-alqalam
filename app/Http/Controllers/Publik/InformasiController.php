@@ -16,6 +16,9 @@ class InformasiController extends Controller
         $totalBuku  = Buku::count();
         $totalKategori = Kategori::count();
 
-        return view('publik.informasi', compact('informasi', 'totalBuku', 'totalKategori'));
+        $judulHalaman = "Informasi Perpustakaan";
+
+        return view('publik.informasi', compact('informasi', 'totalBuku', 'totalKategori', 'judulHalaman'));
     }
+
 }
