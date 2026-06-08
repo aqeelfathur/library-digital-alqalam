@@ -54,24 +54,13 @@
             {{-- Search Bar --}}
             <div class="max-w-3xl mx-auto">
                 <form action="{{ route('explore') }}" method="GET">
-                    <div class="flex gap-0 bg-white rounded-2xl shadow-2xl overflow-hidden">
-
-                        <div class="flex-1 flex items-center gap-3 px-5">
-                            <svg class="w-5 h-5 text-stone-400 flex-shrink-0"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                            </svg>
-
+                    <div class="flex bg-white rounded-lg shadow-lg overflow-hidden">
+                        <div class="flex-1">
                             <input
                                 name="search"
                                 type="text"
                                 placeholder="Masukkan kata kunci untuk mencari koleksi..."
-                                class="flex-1 py-4 text-stone-800 text-sm focus:outline-none placeholder:text-stone-400 bg-transparent"
+                                class="w-full px-5 py-4 text-stone-800 text-sm focus:outline-none placeholder:text-stone-400"
                                 autocomplete="off"
                             />
                         </div>

@@ -21,6 +21,7 @@ class DashboardController extends Controller
             ->orderByDesc('created_at')
             ->paginate(5);
 
-        return view('anggota.dashboard', compact('anggota', 'peminjamanAktif', 'riwayatPeminjaman'));
+        $judulHalaman = "Dashboard Anggota";
+        return view('anggota.dashboard', compact('anggota', 'peminjamanAktif', 'riwayatPeminjaman', 'judulHalaman'));
     }
 }

@@ -21,6 +21,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
         // Rate limit untuk rute login
         $middleware->throttleWithRedis();
+        $middleware->redirectGuestsTo(fn () => route('anggota.login'));
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function (\Illuminate\Auth\AuthenticationException $e, Request $request) {

@@ -1,4 +1,4 @@
-<x-layouts.publik title="Masuk sebagai Anggota">
+<x-layouts.auth title="Masuk sebagai Anggota">
     <div class="min-h-screen bg-gradient-to-br from-stone-100 to-emerald-50 flex items-center justify-center py-12 px-4">
         <div class="w-full max-w-md">
 
@@ -80,7 +80,7 @@
             </div>
 
             <div class="text-center mt-6">
-                <a href="{{ route('beranda') }}" class="text-sm text-stone-500 hover:text-emerald-700 transition-colors">
+                <a href="{{ route('beranda') }}" class="inline-flex items-center justify-center px-6 py-3 bg-emerald-800 hover:bg-emerald-800 text-sm font-semibold text-white rounded-xl transition-colors">
                     Kembali ke Beranda
                 </a>
             </div>

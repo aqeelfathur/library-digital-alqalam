@@ -24,15 +24,12 @@
         x-show="tampil"
         class="mb-6 flex items-start gap-3 p-4 bg-red-50 border border-red-200 text-red-800 rounded-xl"
     >
-        <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z"/>
-        </svg>
         <div class="flex-1">
             @if(session('gagal'))
                 <p class="text-sm font-medium">{{ session('gagal') }}</p>
             @endif
             @if($errors->any())
-                <ul class="list-disc list-inside text-sm space-y-1">
+                <ul class="list-none text-sm space-y-1">
                     @foreach($errors->all() as $error)
                         <li>{{ $error }}</li>
                     @endforeach
