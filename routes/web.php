@@ -18,6 +18,7 @@ use App\Http\Controllers\Pustakawan\DashboardController as PustakawanDashboardCo
 use App\Http\Controllers\Pustakawan\InformasiPerpustakaanController;
 use App\Http\Controllers\Pustakawan\KategoriController;
 use App\Http\Controllers\Pustakawan\PeminjamanController as PustakawanPeminjamanController;
+use App\Http\Controllers\ChatbotController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -130,3 +131,6 @@ Route::prefix('area-pustakawan')->name('pustakawan.')->middleware(['auth', 'pust
     Route::get('/informasi', [InformasiPerpustakaanController::class, 'edit'])->name('informasi.edit');
     Route::patch('/informasi', [InformasiPerpustakaanController::class, 'perbarui'])->name('informasi.perbarui');
 });
+
+Route::post('/sipus/pesan', [ChatbotController::class, 'kirimPesan'])
+    ->name('sipus.pesan');

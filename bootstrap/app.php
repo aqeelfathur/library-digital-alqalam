@@ -22,6 +22,11 @@ return Application::configure(basePath: dirname(__DIR__))
         // Rate limit untuk rute login
         $middleware->throttleWithRedis();
     })
+    ->withMiddleware(function (Middleware $middleware) {
+        $middleware->validateCsrfTokens(except: [
+            'sipus/pesan',
+        ]);
+    })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function (\Illuminate\Auth\AuthenticationException $e, Request $request) {
             if (!$request->expectsJson()) {
