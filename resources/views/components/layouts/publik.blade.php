@@ -24,6 +24,8 @@
 
     <x-publik.footer />
 
+    <x-chatbot.widget />
+
     @stack('scripts')
 </body>
 </html>

@@ -15,6 +15,9 @@ class DatabaseSeeder extends Seeder
             BeritaSeeder::class,
             InformasiPerpustakaanSeeder::class,
             PeminjamanSeeder::class,
+            BiblioSeeder::class,
+            ItemsSeeder::class,
+            LibraryInfoSeeder::class,
         ]);
     }
 }
