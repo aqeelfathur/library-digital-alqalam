@@ -107,7 +107,7 @@ Route::prefix('area-pustakawan')->name('pustakawan.')->middleware(['auth', 'pust
     Route::resource('buku', PustakawanBukuController::class)->except(['show']);
 
     // Manajemen Kategori
-    Route::resource('kategori', KategoriController::class)->except(['show']);
+    Route::resource('kategori', KategoriController::class)->except(['show', 'create', 'edit']);
 
     // Manajemen Peminjaman
     Route::prefix('peminjaman')->name('peminjaman.')->group(function () {
@@ -125,7 +125,9 @@ Route::prefix('area-pustakawan')->name('pustakawan.')->middleware(['auth', 'pust
     });
 
     // Manajemen Berita
-    Route::resource('berita', PustakawanBeritaController::class)->except(['show']);
+    Route::resource('berita', PustakawanBeritaController::class)
+        ->parameters(['berita' => 'berita'])
+        ->except(['show']);
 
     // Informasi Perpustakaan
     Route::get('/informasi', [InformasiPerpustakaanController::class, 'edit'])->name('informasi.edit');

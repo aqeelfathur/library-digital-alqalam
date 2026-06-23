@@ -20,7 +20,7 @@ class DashboardController extends Controller
             'peminjaman_hari_ini'  => Peminjaman::whereDate('created_at', today())->count(),
             'dikembalikan_bulan_ini' => Peminjaman::where('status', 'returned')
                 ->whereMonth('returned_at', now()->month)->count(),
-            'buku_tersedia'        => Buku::isTersedia()->count(),
+            'buku_tersedia'        => Buku::tersedia()->count(),
         ];
 
         $peminjamanTerbaru = Peminjaman::query()
