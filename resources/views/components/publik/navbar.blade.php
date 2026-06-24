@@ -45,7 +45,7 @@
             @php
             $menuNav = [
                 ['rute' => 'beranda',           'label' => 'Beranda',    'aktif' => 'beranda'],
-                ['rute' => 'explore',            'label' => 'Koleksi',   'aktif' => 'explore'],
+                ['rute' => 'explore',            'label' => 'Koleksi',   'aktif' => ['explore', 'anggota.buku.*']],
                 ['rute' => 'informasi',          'label' => 'Informasi', 'aktif' => 'informasi'],
                 ['rute' => 'berita.index',       'label' => 'Berita',    'aktif' => 'berita.*'],
                 ['rute' => 'pustakawan.profil',  'label' => 'Pustakawan','aktif' => 'pustakawan.profil'],
@@ -55,13 +55,14 @@
 
             <div class="hidden lg:flex items-center gap-5 xl:gap-6">
                 @foreach($menuNav as $item)
+                    @php $sedangAktif = request()->routeIs(...(array) $item['aktif']); @endphp
                     <a
                         href="{{ route($item['rute']) }}"
                         class="whitespace-nowrap text-sm font-medium transition-colors duration-300
-                               {{ request()->routeIs($item['aktif'])
+                               {{ $sedangAktif
                                     ? 'text-emerald-300'
                                     : '' }}"
-                        :class="!{{ request()->routeIs($item['aktif']) ? 'true' : 'false' }} && (scrolled ? 'text-stone-600 hover:text-emerald-700' : 'text-white/90 hover:text-white')"
+                        :class="!{{ $sedangAktif ? 'true' : 'false' }} && (scrolled ? 'text-stone-600 hover:text-emerald-700' : 'text-white/90 hover:text-white')"
                     >
                         {{ $item['label'] }}
                     </a>
@@ -139,10 +140,11 @@
          :class="scrolled ? 'border-stone-200' : 'border-white/20'">
         <div class="px-4 py-4 space-y-1">
             @foreach($menuNav as $item)
+                @php $sedangAktif = request()->routeIs(...(array) $item['aktif']); @endphp
                 <a
                     href="{{ route($item['rute']) }}"
                     class="block px-3 py-2.5 text-sm rounded-lg transition-colors
-                           {{ request()->routeIs($item['aktif'])
+                           {{ $sedangAktif
                                 ? 'bg-emerald-50 text-emerald-700 font-medium'
                                 : 'text-stone-700 hover:bg-stone-100' }}"
                 >
