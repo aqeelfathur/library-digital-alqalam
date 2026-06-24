@@ -58,4 +58,4 @@
             </div>
         </div>
     </div>
-</x-layouts.publik>
+</x-layouts.auth>
