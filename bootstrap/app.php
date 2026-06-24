@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        $middleware->trustProxies(at: '*'); 
         $middleware->alias([
             'anggota'    => CekPeranAnggota::class,
             'pustakawan' => CekPeranPustakawan::class,
@@ -22,8 +23,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // Rate limit untuk rute login
         $middleware->throttleWithRedis();
         $middleware->redirectGuestsTo(fn () => route('anggota.login'));
-    })
-    ->withMiddleware(function (Middleware $middleware) {
+
         $middleware->validateCsrfTokens(except: [
             'sipus/pesan',
         ]);

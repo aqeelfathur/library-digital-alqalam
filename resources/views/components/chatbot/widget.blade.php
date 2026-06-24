@@ -8,7 +8,7 @@
     id="sipus-widget"
     x-data="sipusChat()"
     x-init="init()"
-    class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3"
+    class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end gap-3"
 >
     {{-- ── Chat Window ── --}}
     <div
@@ -19,8 +19,8 @@
         x-transition:leave="transition ease-in duration-150"
         x-transition:leave-start="opacity-100 translate-y-0 scale-100"
         x-transition:leave-end="opacity-0 translate-y-4 scale-95"
-        class="w-[360px] bg-white rounded-2xl shadow-2xl border border-stone-200 flex flex-col overflow-hidden"
-        style="height: 500px; display: none;"
+        class="w-[calc(100vw_-_2rem)] max-w-[380px] h-[75vh] max-h-[560px] sm:w-[360px] sm:h-[500px] bg-white rounded-2xl shadow-2xl border border-stone-200 flex flex-col overflow-hidden"
+        style="display: none;"
     >
         {{-- Header --}}
         <div class="bg-emerald-800 px-4 py-3 flex items-center justify-between flex-shrink-0">
@@ -145,6 +145,7 @@
     {{-- ── Toggle Button ── --}}
     <button
         @click="buka = !buka"
+        :class="buka ? 'max-sm:hidden' : ''"
         class="w-14 h-14 rounded-2xl bg-emerald-800 hover:bg-emerald-700 shadow-lg border border-emerald-700 flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 relative"
         :title="buka ? 'Tutup SIPUS' : 'Tanya SIPUS'"
     >
