@@ -4,6 +4,7 @@ function sipusChat() {
         loading:   false,
         inputTeks: '',
         pesan:     [],
+        pesanBelumDibaca: 0,
         history:   [],
 
         init() {

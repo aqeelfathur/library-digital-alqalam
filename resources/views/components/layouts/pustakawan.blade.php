@@ -13,7 +13,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('styles')
 </head>
-<body class="font-jakarta antialiased bg-stone-100" x-data="{ sidebarTerbuka: false }">
+<body class="font-jakarta antialiased bg-stone-100" x-data="{ sidebarTerbuka: true }">
 
     <div class="flex h-screen overflow-hidden">
         <x-pustakawan.sidebar />
