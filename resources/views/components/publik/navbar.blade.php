@@ -29,8 +29,8 @@
                         class="w-12 h-12 object-contain"
                     />
                 </div>
-                <div class="min-w-0">
-                    <p class="max-w-[220px] truncate font-playfair font-bold text-lg leading-none transition-colors duration-300 sm:max-w-[320px] lg:max-w-[360px] xl:max-w-[460px]"
+                <div class="min-w-0 md:hidden xl:block">
+                    <p class="max-w-56 truncate font-playfair font-bold text-lg leading-none transition-colors duration-300 sm:max-w-xs xl:max-w-md"
                        :class="scrolled ? 'text-black' : 'text-white'">
                         Perpustakaan Al Qalam SMA Muhammadiyah 2 Surabaya
                     </p>
@@ -53,12 +53,12 @@
             ];
             @endphp
 
-            <div class="hidden lg:flex items-center gap-5 xl:gap-6">
+            <div class="hidden md:flex items-center gap-3 xl:gap-6">
                 @foreach($menuNav as $item)
                     @php $sedangAktif = request()->routeIs(...(array) $item['aktif']); @endphp
                     <a
                         href="{{ route($item['rute']) }}"
-                        class="whitespace-nowrap text-sm font-medium transition-colors duration-300
+                        class="whitespace-nowrap text-xs xl:text-sm font-medium transition-colors duration-300
                                {{ $sedangAktif
                                     ? 'text-emerald-300'
                                     : '' }}"
@@ -70,19 +70,19 @@
             </div>
 
             {{-- Aksi Desktop --}}
-            <div class="hidden flex-shrink-0 lg:flex items-center">
+            <div class="hidden flex-shrink-0 md:flex items-center">
                 @auth
                     @if(auth()->user()->isAnggota())
                         <div class="inline-flex items-center gap-2 whitespace-nowrap">
                             <a href="{{ route('anggota.dasbor') }}"
-                               class="inline-flex h-9 items-center justify-center rounded-lg px-2 text-sm font-medium transition-colors duration-300"
+                               class="inline-flex h-9 items-center justify-center rounded-lg px-2 text-xs xl:text-sm font-medium transition-colors duration-300"
                                :class="scrolled ? 'text-emerald-700 hover:text-emerald-800' : 'text-white/90 hover:text-white'">
                                 Dashboard Saya
                             </a>
                             <form method="POST" action="{{ route('logout') }}" class="m-0">
                                 @csrf
                                 <button type="submit"
-                                        class="inline-flex h-9 items-center justify-center rounded-lg px-4 text-sm transition-colors duration-300"
+                                        class="inline-flex h-9 items-center justify-center rounded-lg px-3 xl:px-4 text-xs xl:text-sm transition-colors duration-300"
                                         :class="scrolled
                                             ? 'border border-stone-300 text-stone-600 hover:bg-stone-100'
                                             : 'border border-white/40 text-white hover:bg-white/10'">
@@ -93,14 +93,14 @@
                     @elseif(auth()->user()->isPustakawan())
                         <div class="inline-flex items-center gap-2 whitespace-nowrap">
                             <a href="{{ route('pustakawan.dasbor') }}"
-                               class="inline-flex h-9 items-center justify-center rounded-lg px-2 text-sm font-medium transition-colors duration-300"
+                               class="inline-flex h-9 items-center justify-center rounded-lg px-2 text-xs xl:text-sm font-medium transition-colors duration-300"
                                :class="scrolled ? 'text-emerald-700 hover:text-emerald-800' : 'text-white/90 hover:text-white'">
                                 Panel Pustakawan
                             </a>
                             <form method="POST" action="{{ route('logout') }}" class="m-0">
                                 @csrf
                                 <button type="submit"
-                                        class="inline-flex h-9 items-center justify-center rounded-lg px-4 text-sm transition-colors duration-300"
+                                        class="inline-flex h-9 items-center justify-center rounded-lg px-3 xl:px-4 text-xs xl:text-sm transition-colors duration-300"
                                         :class="scrolled
                                             ? 'border border-stone-300 text-stone-600 hover:bg-stone-100'
                                             : 'border border-white/40 text-white hover:bg-white/10'">
@@ -111,7 +111,7 @@
                     @endif
                 @else
                     <a href="{{ route('anggota.login') }}"
-                       class="inline-flex h-9 items-center justify-center whitespace-nowrap rounded-lg px-2 text-sm font-medium transition-colors duration-300"
+                       class="inline-flex h-9 items-center justify-center whitespace-nowrap rounded-lg px-2 text-xs xl:text-sm font-medium transition-colors duration-300"
                        :class="scrolled ? 'text-stone-600 hover:text-emerald-700' : 'text-white/90 hover:text-white'">
                         Masuk
                     </a>
@@ -121,7 +121,7 @@
             {{-- Tombol Hamburger Mobile --}}
             <button
                 @click="menuTerbuka = !menuTerbuka"
-                class="flex-shrink-0 p-2 rounded-lg transition-colors duration-300 lg:hidden"
+                class="flex-shrink-0 p-2 rounded-lg transition-colors duration-300 md:hidden"
                 :class="scrolled ? 'text-stone-600 hover:bg-stone-100' : 'text-white hover:bg-white/10'"
                 aria-label="Menu"
             >
@@ -136,7 +136,7 @@
     </div>
 
     {{-- Menu Mobile --}}
-    <div x-show="menuTerbuka" x-collapse x-cloak class="lg:hidden border-t bg-white"
+    <div x-show="menuTerbuka" x-collapse x-cloak class="md:hidden border-t bg-white"
          :class="scrolled ? 'border-stone-200' : 'border-white/20'">
         <div class="px-4 py-4 space-y-1">
             @foreach($menuNav as $item)

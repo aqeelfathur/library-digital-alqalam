@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Anggota;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Buku\StoreUlasanBukuRequest;
 use App\Models\Buku;
 use App\Models\Kategori;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -28,9 +30,25 @@ class BukuController extends Controller
 
     public function show(Buku $buku): View
     {
-        $buku->load('kategori');
-        $sedangMeminjam = auth()->user()->sedangMeminjam();
+        $buku->load([
+            'kategori',
+            'ulasan' => fn ($query) => $query->with('user')->latest(),
+        ])->loadCount('ulasan')->loadAvg('ulasan', 'rating');
 
-        return view('anggota.buku.show', compact('buku', 'sedangMeminjam'));
+        $sedangMeminjam = auth()->user()->sedangMeminjam();
+        $ulasanSaya = $buku->ulasan
+            ->firstWhere('user_id', auth()->id());
+
+        return view('anggota.buku.show', compact('buku', 'sedangMeminjam', 'ulasanSaya'));
+    }
+
+    public function simpanUlasan(StoreUlasanBukuRequest $request, Buku $buku): RedirectResponse
+    {
+        $buku->ulasan()->updateOrCreate(
+            ['user_id' => $request->user()->id],
+            $request->validated()
+        );
+
+        return back()->with('sukses', 'Ulasan buku berhasil disimpan.');
     }
 }

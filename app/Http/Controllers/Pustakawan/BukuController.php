@@ -64,6 +64,16 @@ class BukuController extends Controller
         return view('pustakawan.buku.edit', compact('buku', 'kategori'));
     }
 
+    public function show(Buku $buku): View
+    {
+        $buku->load([
+            'kategori',
+            'ulasan' => fn ($query) => $query->with('user')->latest(),
+        ])->loadCount('ulasan')->loadAvg('ulasan', 'rating');
+
+        return view('pustakawan.buku.show', compact('buku'));
+    }
+
     public function update(UpdateBukuRequest $request, Buku $buku): RedirectResponse
     {
         $data = $request->validated();

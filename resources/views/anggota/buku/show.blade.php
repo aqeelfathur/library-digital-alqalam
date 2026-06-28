@@ -111,4 +111,6 @@
         </div>
     </div>
 
+    <x-buku.ulasan :buku="$buku" :ulasan-saya="$ulasanSaya" :boleh-mengulas="true" />
+
 </x-layouts.anggota>

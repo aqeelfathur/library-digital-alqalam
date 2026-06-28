@@ -99,9 +99,14 @@
                                class="inline-flex items-center gap-1 text-xs px-3 py-1.5 bg-emerald-700 text-white rounded-lg hover:bg-emerald-800 transition-colors font-medium whitespace-nowrap">
                                 Detail
                             </a>
+                        @else
+                            <a href="{{ route('buku.show', $buku) }}"
+                               class="inline-flex items-center gap-1 text-xs px-3 py-1.5 bg-emerald-700 text-white rounded-lg hover:bg-emerald-800 transition-colors font-medium whitespace-nowrap">
+                                Detail
+                            </a>
                         @endif
                     @else
-                        <a href="{{ route('anggota.login') }}"
+                        <a href="{{ route('buku.show', $buku) }}"
                            class="inline-flex items-center gap-1 text-xs px-3 py-1.5 border border-emerald-300 text-emerald-700 rounded-lg hover:bg-emerald-50 transition-colors font-medium whitespace-nowrap">
                             Detail
                         </a>

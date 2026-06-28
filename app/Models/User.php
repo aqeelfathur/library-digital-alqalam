@@ -49,6 +49,11 @@ class User extends Authenticatable
         return $this->hasMany(LogAktivitas::class, 'user_id');
     }
 
+    public function ulasanBuku(): HasMany
+    {
+        return $this->hasMany(UlasanBuku::class, 'user_id');
+    }
+
     // Scopes
     public function scopeAnggota($query)
     {

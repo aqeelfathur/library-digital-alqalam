@@ -51,6 +51,11 @@ class Buku extends Model
         return $this->hasMany(Peminjaman::class, 'book_id');
     }
 
+    public function ulasan(): HasMany
+    {
+        return $this->hasMany(UlasanBuku::class, 'book_id');
+    }
+
     // ── Scopes ────────────────────────────────────────────────────
 
     public function scopeTersedia($query)

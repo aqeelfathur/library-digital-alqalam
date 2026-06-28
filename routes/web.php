@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\AnggotaLoginController;
 use App\Http\Controllers\Auth\PustakawanLoginController;
 use App\Http\Controllers\Publik\BantuanController;
 use App\Http\Controllers\Publik\BerandaController;
+use App\Http\Controllers\Publik\BukuController as PublikBukuController;
 use App\Http\Controllers\Publik\BeritaController as PublikBeritaController;
 use App\Http\Controllers\Publik\InformasiController;
 use App\Http\Controllers\Publik\PustakawanPublikController;
@@ -19,6 +20,7 @@ use App\Http\Controllers\Pustakawan\InformasiPerpustakaanController;
 use App\Http\Controllers\Pustakawan\KategoriController;
 use App\Http\Controllers\Pustakawan\PeminjamanController as PustakawanPeminjamanController;
 use App\Http\Controllers\ChatbotController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -32,6 +34,7 @@ Route::get('/', [BerandaController::class, 'index'])->name('beranda');
 Route::get('/informasi', [InformasiController::class, 'index'])->name('informasi');
 Route::get('/bantuan', [BantuanController::class, 'index'])->name('bantuan');
 Route::get('/pustakawan', [PustakawanPublikController::class, 'index'])->name('pustakawan.profil');
+Route::get('/buku/{buku}', [PublikBukuController::class, 'show'])->name('buku.show');
 
 Route::prefix('berita')->name('berita.')->group(function () {
     Route::get('/', [PublikBeritaController::class, 'index'])->name('index');
@@ -81,6 +84,7 @@ Route::prefix('area-anggota')->name('anggota.')->middleware(['auth', 'anggota'])
     Route::prefix('buku')->name('buku.')->group(function () {
         Route::get('/', [AnggotaBukuController::class, 'index'])->name('index');
         Route::get('/{buku}', [AnggotaBukuController::class, 'show'])->name('show');
+        Route::post('/{buku}/ulasan', [AnggotaBukuController::class, 'simpanUlasan'])->name('ulasan.simpan');
     });
 
     Route::prefix('peminjaman')->name('peminjaman.')->group(function () {
@@ -104,7 +108,7 @@ Route::prefix('area-pustakawan')->name('pustakawan.')->middleware(['auth', 'pust
     Route::get('/dasbor', [PustakawanDashboardController::class, 'index'])->name('dasbor');
 
     // Manajemen Buku
-    Route::resource('buku', PustakawanBukuController::class)->except(['show']);
+    Route::resource('buku', PustakawanBukuController::class);
 
     // Manajemen Kategori
     Route::resource('kategori', KategoriController::class)->except(['show', 'create', 'edit']);

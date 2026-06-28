@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
             KategoriSeeder::class,
             UserSeeder::class,
             BukuSeeder::class,
+            UlasanBukuSeeder::class,
             BeritaSeeder::class,
             InformasiPerpustakaanSeeder::class,
             PeminjamanSeeder::class,

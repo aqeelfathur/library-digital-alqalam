@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -33,7 +34,9 @@ return new class extends Migration
             $table->index('category_id');
             $table->index('status');
             $table->index('title');
-            $table->fullText(['title', 'author', 'subject']);
+            if (DB::connection()->getDriverName() !== 'sqlite') {
+                $table->fullText(['title', 'author', 'subject']);
+            }
         });
     }
 
