@@ -17,8 +17,7 @@ class BerandaController extends Controller
 
         $bukuPopuler = Buku::query()
             ->with('kategori')
-            ->withCount('peminjaman')
-            ->orderByDesc('peminjaman_count')
+            ->orderByDesc('slims_loan_count')
             ->limit(12)
             ->get();
 
@@ -42,12 +41,11 @@ class BerandaController extends Controller
         // dengan buku terbaru agar section tidak tampil setengah kosong.
         $bukuRekomendasi = Buku::query()
             ->with('kategori')
-            ->withCount('peminjaman')
-            ->having('peminjaman_count', '>', 0)
-            ->orderByDesc('peminjaman_count')
+            ->where('slims_loan_count', '>', 0)
+            ->orderByDesc('slims_loan_count')
             ->limit(6)
             ->get();
-
+            
         if ($bukuRekomendasi->count() < 6) {
             $idSudahAda = $bukuRekomendasi->pluck('id');
 

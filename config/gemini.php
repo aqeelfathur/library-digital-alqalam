@@ -25,10 +25,17 @@ return [
     'max_output_tokens' => 1024,
 
     // Jumlah dokumen konteks yang diambil dari vector store untuk RAG
-    'rag_top_k' => 5,
+    'rag_top_k' => 3,
 
     // Threshold minimum cosine similarity (0.0–1.0)
     // Di bawah nilai ini, dokumen dianggap tidak relevan
-    'similarity_threshold' => 0.65,
+    'similarity_threshold' => 0.55,
+
+    'embedding_driver'       => env('EMBEDDING_DRIVER', 'gemini'),
+    'ollama_url'             => env('OLLAMA_URL', 'http://localhost:11434'),
+    'ollama_embedding_model' => env('OLLAMA_EMBEDDING_MODEL', 'bge-m3'),
+
+    'chat_driver'       => env('CHAT_DRIVER', 'gemini'),
+    'ollama_chat_model' => env('OLLAMA_CHAT_MODEL', 'qwen2.5:3b-instruct'),
 
 ];

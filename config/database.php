@@ -114,6 +114,20 @@ return [
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
 
+        'slims' => [
+            'driver'      => 'mysql',
+            'host'        => env('SLIMS_DB_HOST', '127.0.0.1'),
+            'port'        => env('SLIMS_DB_PORT', '3306'),
+            'database'    => env('SLIMS_DB_DATABASE', 'slims_smamda'),
+            'username'    => env('SLIMS_DB_USERNAME', 'root'),
+            'password'    => env('SLIMS_DB_PASSWORD', ''),
+            'charset'     => 'utf8',              // SLiMS = utf8mb3; cocokkan agar tak error baca
+            'collation'   => 'utf8_unicode_ci',
+            'prefix'      => '',
+            'strict'      => false,              // matikan ONLY_FULL_GROUP_BY untuk query GROUP BY
+            'engine'      => null,
+        ],
+
     ],
 
     /*

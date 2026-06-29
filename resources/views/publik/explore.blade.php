@@ -77,7 +77,7 @@
         <div class="flex flex-col lg:flex-row gap-6" x-data="{ advancedTerbuka: {{ $adaFilter && !filled($filter['search']) ? 'true' : 'false' }} }">
 
             {{-- ── KOLOM KIRI ── --}}
-            <div class="flex-1 min-w-0">
+            <div class="flex-1 min-w-0 lg:min-w-[600px]">
 
                 {{-- ADVANCED SEARCH FORM --}}
                 <div class="bg-white rounded-xl shadow-sm border border-stone-100 mb-6 overflow-hidden">
@@ -313,12 +313,14 @@
             </div>
 
             {{-- ── SIDEBAR KANAN ── --}}
-            <x-explore.sidebar-rekomendasi
-                :buku="$rekomendasiBuku"
-                :kategori="$kategori"
-                :filter="$filter"
-                :totalBuku="$totalBuku"
-            />
+            <div class="flex-shrink-0" style="width: 320px;">
+                <x-explore.sidebar-rekomendasi
+                    :buku="$rekomendasiBuku"
+                    :kategori="$kategori"
+                    :filter="$filter"
+                    :totalBuku="$totalBuku"
+                />
+            </div>
         </div>
     </div>
 

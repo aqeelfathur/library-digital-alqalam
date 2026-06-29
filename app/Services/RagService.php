@@ -88,40 +88,42 @@ class RagService
                 continue;
             }
 
-            $biblioId = $doc['source_id'];
+            $biblioId = (int) $doc['source_id'];
 
-            // Ambil semua eksemplar buku ini
-            $items = DB::table('items')
-                ->where('biblio_id', $biblioId)
-                ->get();
+            // Ketersediaan LIVE dari SLiMS:
+            //   tersedia = item_status_id '0'/''/NULL  DAN  tidak ada loan(is_return=0)
+            $stat = DB::connection('slims')->selectOne("
+                SELECT
+                  COUNT(i.item_id) AS total,
+                  SUM(CASE WHEN (i.item_status_id = '0' OR i.item_status_id = '' OR i.item_status_id IS NULL)
+                            AND NOT EXISTS (
+                                SELECT 1 FROM loan l
+                                WHERE l.item_code = i.item_code AND l.is_return = 0
+                            )
+                           THEN 1 ELSE 0 END) AS tersedia,
+                  (SELECT MIN(l.due_date)
+                     FROM item i2 JOIN loan l ON l.item_code = i2.item_code AND l.is_return = 0
+                    WHERE i2.biblio_id = ?) AS due_terdekat
+                FROM item i
+                WHERE i.biblio_id = ?
+            ", [$biblioId, $biblioId]);
 
-            $totalExemplars  = $items->count();
-            $availableCount  = $items->where('item_status_id', 0)->count();
-            $borrowedCount   = $items->where('item_status_id', 1)->count();
-            $damagedCount    = $items->where('item_status_id', 2)->count();
+            $total    = (int) ($stat->total ?? 0);
+            $tersedia = (int) ($stat->tersedia ?? 0);
+            $due      = $stat->due_terdekat ?? null;
 
-            // Cari due_date paling dekat untuk yang dipinjam
-            $nearestDueDate = $items
-                ->where('item_status_id', 1)
-                ->sortBy('due_date')
-                ->first()?->due_date;
+            if ($total === 0) {
+                $stok = 'Status ketersediaan: tidak ada data eksemplar untuk judul ini.';
+            } elseif ($tersedia > 0) {
+                $stok = "Status ketersediaan: TERSEDIA ({$tersedia} dari {$total} eksemplar dapat dipinjam).";
+            } else {
+                $stok = "Status ketersediaan: SEDANG DIPINJAM SEMUA (0 dari {$total} tersedia)"
+                      . ($due ? ". Perkiraan eksemplar terdekat kembali: {$due}." : '.');
+            }
 
-            // Tambahkan info stok ke chunk_text sebagai append
-            $stockInfo = $this->formatStockInfo(
-                $totalExemplars,
-                $availableCount,
-                $borrowedCount,
-                $damagedCount,
-                $nearestDueDate
-            );
-
-            $doc['stock_info']       = $stockInfo;
-            $doc['available_count']  = $availableCount;
-            $doc['total_exemplars']  = $totalExemplars;
-
-            // Append info stok ke chunk_text agar terlihat di konteks prompt
-            $doc['chunk_text'] .= "\n" . $stockInfo;
+            $doc['chunk_text'] .= "\n\n[Stok real-time] {$stok}";
         }
+        unset($doc);
 
         return $docs;
     }
